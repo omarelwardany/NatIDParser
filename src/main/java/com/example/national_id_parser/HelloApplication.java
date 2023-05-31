@@ -50,6 +50,10 @@ public class HelloApplication extends Application {
         gender.setEditable(false);
         gov.setEditable(false);
         bdate.setEditable(false);
+        gender.setStyle("-fx-control-inner-background: #F4F4F4;");
+        gov.setStyle("-fx-control-inner-background: #F4F4F4;");
+        bdate.setStyle("-fx-control-inner-background: #F4F4F4;");
+
         pane.add(gender,1,2);
         pane.add(gov,1,3);
         pane.add(bdate,1,4);
