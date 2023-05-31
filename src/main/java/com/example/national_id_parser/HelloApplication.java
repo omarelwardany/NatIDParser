@@ -65,7 +65,21 @@ public class HelloApplication extends Application {
                 gov.setText(numToGov(m.group(5)));
                 gender.setText(numtoGender(m.group(6)));
                 bdate.setText(StringToBdate(m.group(4), m.group(3), m.group(2), m.group(1)));
-                checkForID = true;
+            } else if (natID.getText().matches("[23]") || natID.getText().matches("[23]\\d{1,2}") || natID.getText().matches("[23]\\d\\d[01]")
+                    || natID.getText().matches("([23])(\\d\\d)(0[1-9]|1[0-2])") || natID.getText().matches("([23])(\\d\\d)(0[1-9]|1[0-2])[0-3]")
+                    || natID.getText().matches("([23])(\\d\\d)(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])") || natID.getText().matches("([23])(\\d\\d)(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])[01238]")
+                    || natID.getText().matches("([23])(\\d\\d)(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])(0[1-4]|1[1-9]|2[1-9]|3[1-5]|88)") || natID.getText().matches("([23])(\\d\\d)(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])(0[1-4]|1[1-9]|2[1-9]|3[1-5]|88)\\d{1,4}")) {
+                natID.setBorder(gov.getBorder());
+                natID.setBackground(gov.getBackground());
+                validNatIDIndicator.setText((14 - natID.getText().length()) + " digit(s) left");
+                gov.setText("");
+                gender.setText("");
+                bdate.setText("");
+            } else if (natID.getText().isBlank()) {
+                validNatIDIndicator.setText("");
+                gov.setText("");
+                gender.setText("");
+                bdate.setText("");
             } else if (natID.getText().length() == 14) {
                 validNatIDIndicator.setText("Invalid National ID");
                 natID.setBorder(Border.stroke(Color.RED));
@@ -73,13 +87,8 @@ public class HelloApplication extends Application {
                 gov.setText("");
                 gender.setText("");
                 bdate.setText("");
-                checkForID = true;
             } else if (natID.getText().length() > 14 || (e.getCharacter().matches("\\D") && !(e.getCharacter().equals("\b")))) {
                 natID.deletePreviousChar();
-            } else if (!checkForID) {
-                validNatIDIndicator.setText("");
-                natID.setBorder(gov.getBorder());
-                natID.setBackground(gov.getBackground());
             } else {
                 validNatIDIndicator.setText("Invalid National ID");
                 natID.setBorder(Border.stroke(Color.RED));
