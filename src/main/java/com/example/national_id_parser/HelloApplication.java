@@ -12,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +19,7 @@ public class HelloApplication extends Application {
     boolean checkForID;
     String natIDPattern = "([23])(\\d\\d)(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])(0[1-4]|1[1-9]|2[1-9]|3[1-5]|88)\\d{3}(\\d)\\d";
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         checkForID = false;
         Insets def = new Insets(10,10,10,10);
         GridPane pane = new GridPane();
@@ -67,7 +66,7 @@ public class HelloApplication extends Application {
                 Matcher m = r.matcher(natID.getText());
                 m.find();
                 gov.setText(numToGov(m.group(5)));
-                gender.setText(numtoGender(m.group(6)));
+                gender.setText(numToGender(m.group(6)));
                 bdate.setText(StringToBdate(m.group(4), m.group(3), m.group(2), m.group(1)));
             } else if (natID.getText().matches("[23]") || natID.getText().matches("[23]\\d{1,2}") || natID.getText().matches("[23]\\d\\d[01]")
                     || natID.getText().matches("([23])(\\d\\d)(0[1-9]|1[0-2])") || natID.getText().matches("([23])(\\d\\d)(0[1-9]|1[0-2])[0-3]")
@@ -111,7 +110,7 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         launch();
     }
 
@@ -146,7 +145,7 @@ public class HelloApplication extends Application {
         else return "Outside Egypt";
     }
 
-    public static String numtoGender(String num) {
+    public static String numToGender(String num) {
         if (num.matches("[13579]")) return "Male";
         else return "Female";
     }
